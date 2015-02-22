@@ -52,7 +52,11 @@ public class Node {
 	} //End public Node[] getConnectedNodes()
 	
 	public boolean isConnectedNode(Node n) {
-		return connectedNodes.stream().anyMatch((node) -> (node.equals(n)));
+		if(connectedNodes != null) {		
+			return connectedNodes.stream().anyMatch((node) -> (node.equals(n)));
+		} else {
+			return false;
+		}
 		
 	} //End public boolean isConnectedNode(Node)
 	
