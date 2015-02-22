@@ -1,8 +1,6 @@
 package maptraverser;
 
 import java.util.HashMap;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,7 +13,7 @@ import javafx.stage.Stage;
  *
  * @author Kellen
  */
-public class GUI extends Application {
+public class GUI {
     //Fields
 	private final HashMap<String, Node> map;
 	private ComboBox<String> searchBox;
@@ -23,20 +21,13 @@ public class GUI extends Application {
 	private Button runButton;
 	
 	//Constructor
-	public GUI(HashMap<String, Node> map, String[] args) {
+	public GUI(HashMap<String, Node> map, Stage primaryStage) {
 	    this.map = map;
+		
+		primaryStage.setTitle("Map Traverser");
+		primaryStage.setScene(buildGUI());
 
-	    launch(args);
 	}
-	
-	//Start
-	@Override
-	public void start(Stage stage) {
-		stage.setTitle("Node Traverser");
-        stage.setScene(buildGUI());
-        stage.show();
-	
-	} 
 	
 	public void addBoxListener() {
 	    runButton.setOnAction((ActionEvent event) -> {
