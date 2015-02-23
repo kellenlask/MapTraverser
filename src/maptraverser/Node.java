@@ -108,7 +108,7 @@ public class Node {
             }
 
         } catch (Exception e) {
-            System.out.println("Whoops: " + e);
+            e.printStackTrace();
         }
 
     } //End public void addConnectedNode(Node
