@@ -33,16 +33,19 @@ public class MapTools {
 
             //Place all the nodes into the Map with their heuristic weights
             for(int i = 0; i < data[0].length; i++) {
-                    if( !map.containsKey(data[0][i]) ) {
-                            map.put(data[0][i], new Node(data[0][i], data[3][i]));
-                    }	
+				if( !map.containsKey(data[0][i]) ) {
+					map.put(data[0][i], new Node(data[0][i], data[3][i]));
+				}	
             }	
 
             //Per entry, add the connection and its weight. This only works if each connection is mapped both ways (the .csv is as such)
             for(int i = 0; i < data[0].length; i++) {
-                    if( !map.get(data[0][i]).isConnectedNode(map.get(data[1][i])) ) {
-                            map.get(data[0][i]).addConnectedNode(map.get(data[1][i]), data[2][i]);
-                    }
+				Node a = map.get(data[0][i]);
+				Node b = map.get(data[1][i]);
+				
+				if( !map.get(data[0][i]).isConnectedNode(map.get(data[1][i])) ) {
+					map.get(data[0][i]).addConnectedNode(map.get(data[1][i]), data[2][i]);
+				}
             }
 
             return map;

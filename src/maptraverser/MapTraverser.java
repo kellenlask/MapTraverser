@@ -7,6 +7,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,26 +27,17 @@ public class MapTraverser extends Application {
 		try {
 			String[][] csvContents = MapTools.parseCSV(selectedFile); //Read the CSV file
 			
-			for(String[] sA : csvContents) {
-				for(String s : sA) {
-				
-					System.out.print(s);
-				}
-				
-				System.out.println();
-			
-			}
-			
 			HashMap<String, Node> map = MapTools.dataToMap(csvContents); //Convert the CSV contents into a Node Map		
 			
 			//new GUI(map, primaryStage);
 			
 		} catch (IOException ex) {
-			//JOptionPane.showMessageDialog(null, "FileNotFoundException encountered while parsing .csv file.");
+			JOptionPane.showMessageDialog(null, "FileNotFoundException encountered while parsing .csv file.");
 			ex.printStackTrace();
-		}/* catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Something unexpected occured: " + ex.getMessage());			
-		}*/
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, "Something unexpected occured: " + ex.getMessage());
+			ex.printStackTrace();
+		}
 	}
 	
 	//Get a CSV file from the user
