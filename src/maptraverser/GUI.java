@@ -2,9 +2,12 @@ package maptraverser;
 
 import java.util.HashMap;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -20,41 +23,54 @@ public class GUI {
 	private Text results;
 	private Button runButton;
 	
+	
 	//Constructor
 	public GUI(HashMap<String, Node> map, Stage primaryStage) {
 	    this.map = map;
-		
 		primaryStage.setTitle("Map Traverser");
 		primaryStage.setScene(buildGUI());
+		primaryStage.show();
+		
 
-	}
+	} //End Constructor
+	
 	
 	public void addBoxListener() {
-	    runButton.setOnAction((ActionEvent event) -> {
-			/*switch(searchBox.getSelectedIndex()) {
-				case 0:
-					results.setText(SearchTools.breadthFirstSearch(map));
-					break;
-					
-				case 1:
-					results.setText(SearchTools.breadthFirstSearch(map));
-					break;
-					
-				default:
-					results.setText("Ya done broke it!");
-					break;
-					
-			} //End Switch		*/
-		});	
-	}
+	    runButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent event) {
+				String selectedItem = searchBox.getSelectionModel().getSelectedItem();
+				
+				switch(selectedItem) {
+					case "Breadth-First Search":
+						results.setText(Searches.breadthFirstSearch(map));
+						break;
+						
+					case "A* Search":
+						results.setText(Searches.aStar(map));
+						break;
+						
+					default:
+						results.setText("Ya done broke it!");
+						break;
+						
+				} //End Switch		
+			} //End public void handle(ActionEvent)
+		});	//End setOnAction(...
+	} //End public void addBoxListener()
 	
 	
 	public Scene buildGUI() {
 	    runButton = new Button("Run");
-		
+		results = new Text();
 	    searchBox = new ComboBox<>();
-	    searchBox.getItems().addAll("Breadth-First Search", "Zero-Cost Search");
-
+	    searchBox.getItems().addAll("Breadth-First Search", "A* Search");
+		Image img = new Image("https://t2thompson.files.wordpress.com/2014/09/romania-graph1.png");
+		ImageView imgView = new ImageView(img);
+		imgView.setImage(img);
+		imgView.setFitWidth(800);
+		imgView.setPreserveRatio(true);
+		
 	    addBoxListener();
 
 	    GridPane grid = new GridPane();
@@ -62,10 +78,11 @@ public class GUI {
 	    grid.setHgap(10);
 	    grid.add(new Text("Select a search method:"), 0, 0);
 	    grid.add(searchBox, 1, 0);
-	    grid.add(runButton, 1, 1);
-	    grid.add(results, 3, 0);
-
-	    Scene scene = new Scene(grid, 450, 250);
+	    grid.add(runButton, 2, 0);
+	    grid.add(results, 0, 1);
+		grid.add(imgView, 0, 2, 3, 1);
+		
+	    Scene scene = new Scene(grid, 800, 550);
 		
 	    return scene;
 	    
