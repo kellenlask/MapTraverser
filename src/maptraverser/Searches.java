@@ -13,10 +13,8 @@ public class Searches {
 		Node targetNode = map.get("Bucharest");
 		LinkedList<Node> queue = new LinkedList<>();
 		
-		//If root and target nodes are not set, test here:		
-		/*if(rootNode.equals(targetNode)) {
-				return rootNode.getName();
-		}*/
+		rootNode.setExpanded(true);
+		queue.push(rootNode);
 		
 		while(queue.size() > 0) {
 			
@@ -31,12 +29,10 @@ public class Searches {
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
 		
-		//If root and target nodes are not set, test here:		
-		/*if(rootNode.equals(targetNode)) {
-				return rootNode.getName();
-		}*/
 		
-		
+		while(targetNode.isExpanded() == false) {
+			
+		}
 		
 		return "";
 		
