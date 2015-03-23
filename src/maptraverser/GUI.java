@@ -35,11 +35,13 @@ public class GUI {
 	} //End Constructor
 	
 	
-	public void addBoxListener() {
+	public void addRunButtonListener() {
 	    runButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
-				String selectedItem = searchBox.getSelectionModel().getSelectedItem();
+				
+				String selectedItem = "";
+				selectedItem += searchBox.getSelectionModel().getSelectedItem(); //Get the selected Search Algorithm from the selectionBox
 				
 				switch(selectedItem) {
 					case "Breadth-First Search":
@@ -51,13 +53,13 @@ public class GUI {
 						break;
 						
 					default:
-						results.setText("Ya done broke it!");
+						results.setText("Please select a search algorithm.");
 						break;
 						
 				} //End Switch		
 			} //End public void handle(ActionEvent)
 		});	//End setOnAction(...
-	} //End public void addBoxListener()
+	} //End public void addRunButtonListener()
 	
 	
 	public Scene buildGUI() {
@@ -71,7 +73,7 @@ public class GUI {
 		imgView.setFitWidth(800);
 		imgView.setPreserveRatio(true);
 		
-	    addBoxListener();
+	    addRunButtonListener();
 
 	    GridPane grid = new GridPane();
 	    grid.setVgap(4);
