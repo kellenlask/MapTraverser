@@ -27,7 +27,11 @@ public class Searches {
 
 			} else {
 				for(Node n : tmp.getConnectedNodes()) {
-				queue.push(n);
+					if(!n.isExpanded()) {
+						n.setExpanded(true);
+						n.setExpandedBy(tmp);
+						queue.push(n);
+					}
 				}
 			}			
 		} //End While Loop

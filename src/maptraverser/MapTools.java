@@ -68,4 +68,23 @@ public class MapTools {
 		return selectedFile;
 	}
 	
+	public String getReturnPath(Node end, Node start) {
+		String solution = "";
+		int totalCost = 0;
+		Node parent = end;
+		
+		do {
+			solution =  "  ->  " + parent.getName() + solution;
+			totalCost += parent.getConnectionWeight(parent.getExpandedBy());
+			
+			parent = parent.getExpandedBy();
+			
+		} while(!parent.equals(start)); 	
+		
+		
+		solution = start.getName() + solution + " Total Cost: " + totalCost;
+		
+		return solution;
+	}
+	
 }
