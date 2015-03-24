@@ -1,5 +1,6 @@
 package maptraverser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -9,16 +10,27 @@ import java.util.LinkedList;
  */
 public class Searches {
 	public static String breadthFirstSearch(HashMap<String, Node> map) {
+		LinkedList<Node> queue = new LinkedList<>();
+		ArrayList<Node> solution = new ArrayList<>();
+		
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
-		LinkedList<Node> queue = new LinkedList<>();
 		
 		rootNode.setExpanded(true);
-		queue.push(rootNode);
+		queue.push(rootNode);	
 		
 		while(queue.size() > 0) {
+			Node tmp = queue.pop();
 			
-		}
+			if(tmp.equals(targetNode)) {
+				
+
+			} else {
+				for(Node n : tmp.getConnectedNodes()) {
+				queue.push(n);
+				}
+			}			
+		} //End While Loop
 		
 		return "";
 		
