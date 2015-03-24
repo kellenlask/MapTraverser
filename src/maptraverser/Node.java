@@ -1,6 +1,7 @@
 package maptraverser;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  *
@@ -59,8 +60,8 @@ public class Node {
 
 	} //End public boolean equals(Node)
 
-	public Node[] getConnectedNodes() {
-		return (Node[]) connectedNodes.keySet().toArray();
+	public Set<Node> getConnectedNodes() {
+		return connectedNodes.keySet();
 
 	} //End public Node[] getConnectedNodes()
 
@@ -69,7 +70,7 @@ public class Node {
 
 	} //End public boolean isConnectedNode(Node)
 
-	public int getHeuristicWeight() throws NoSuchFieldException {
+	public int getHeuristicWeight() {
 		return heuristicWeight;
 
 	} //End public int getHeuristicWeight(Node)
@@ -79,6 +80,10 @@ public class Node {
 
 	} //End public int getConnectionWeight(Node)
 
+	public int getCombined(Node n) {
+		return connectedNodes.get(n) + n.getHeuristicWeight();
+	}
+	
 //Mutators
 	public void setName(String name) {
 		this.name = name;

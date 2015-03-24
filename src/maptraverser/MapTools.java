@@ -68,7 +68,7 @@ public class MapTools {
 		return selectedFile;
 	}
 	
-	public String getReturnPath(Node end, Node start) {
+	public static String getReturnPath(Node start, Node end) {
 		String solution = "";
 		int totalCost = 0;
 		Node parent = end;
@@ -79,8 +79,7 @@ public class MapTools {
 			
 			parent = parent.getExpandedBy();
 			
-		} while(!parent.equals(start)); 	
-		
+		} while(!parent.equals(start)); 			
 		
 		solution = start.getName() + solution + " Total Cost: " + totalCost;
 		
