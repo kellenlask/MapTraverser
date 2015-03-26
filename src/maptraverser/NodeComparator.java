@@ -6,7 +6,7 @@ import java.util.Comparator;
  *
  * @author Kellen
  */
-public class AStarComparator implements Comparator<Node> {
+public class NodeComparator implements Comparator<Node> {
 
 	@Override
 	public int compare(Node o1, Node o2) {
