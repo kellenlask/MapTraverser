@@ -2,7 +2,9 @@ package maptraverser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.TreeSet;
 
 /**
  *
@@ -43,23 +45,26 @@ public class Searches {
 
 	} //End public static String breadthFirstSearch(HashMap<String, Node>)
 
-	public static String aStar(HashMap<String, Node> map) {
+	public static String uniformCostSearch(HashMap<String, Node> map) {
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
 		
-		
-		
-		
-		
+		TreeSet<Action> frontier = new TreeSet<>();
+		HashSet<Node> exploredNodes = new HashSet<>();
+				
 		Node selectedNode = rootNode;
 		
-		while (!targetNode.isExpanded()) {
+		while (frontier.size() > 0) {
 			for(Node n : selectedNode.getConnectedNodes()) {
-				
+				frontier.add(new Action(selectedNode, n));
 			}
+			
+			Action a = frontier.pollFirst();
+			
+			
 		}
 
 		return "";
 
-	} //End public static String aStar(HashMap<String, Node>)
+	} //End public static String uniformCostSearch(HashMap<String, Node>)
 } //End public class Searches

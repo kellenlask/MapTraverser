@@ -7,7 +7,7 @@ import java.util.Set;
  *
  * @author Kellen
  */
-public class Node {
+public class Node implements Cloneable {
 //Fields
 
 	private String name;
@@ -84,6 +84,7 @@ public class Node {
 		return connectedNodes.get(n) + n.getHeuristicWeight();
 	}
 	
+
 //Mutators
 	public void setName(String name) {
 		this.name = name;

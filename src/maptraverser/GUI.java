@@ -19,15 +19,12 @@ import javafx.stage.Stage;
 public class GUI {
 
 	//Fields
-
-	private final HashMap<String, Node> map;
 	private ComboBox<String> searchBox;
 	private Text results;
 	private Button runButton;
 
 	//Constructor
-	public GUI(HashMap<String, Node> map, Stage primaryStage) {
-		this.map = map;
+	public GUI(Stage primaryStage) {
 		primaryStage.setTitle("Map Traverser");
 		primaryStage.setScene(buildGUI());
 		primaryStage.show();
@@ -38,7 +35,9 @@ public class GUI {
 		runButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			public void handle(ActionEvent event) {
-
+				MapTools mt = new MapTools();
+				HashMap<String, Node> map = mt.getMap();
+				
 				String selectedItem = "";
 				selectedItem += searchBox.getSelectionModel().getSelectedItem(); //Get the selected Search Algorithm from the selectionBox
 
@@ -47,8 +46,8 @@ public class GUI {
 						results.setText(Searches.breadthFirstSearch(map));
 						break;
 
-					case "A* Search":
-						results.setText(Searches.aStar(map));
+					case "Uniform Cost Search":
+						results.setText(Searches.uniformCostSearch(map));
 						break;
 
 					default:
@@ -64,9 +63,11 @@ public class GUI {
 		runButton = new Button("Run");
 		results = new Text();
 		searchBox = new ComboBox<>();
-		searchBox.getItems().addAll("Breadth-First Search", "A* Search");
+		searchBox.getItems().addAll("Breadth-First Search", "Uniform Cost Search");
 
-		Image img = new Image("https://t2thompson.files.wordpress.com/2014/09/romania-graph1.png");
+		//Image img = new Image("https://t2thompson.files.wordpress.com/2014/09/romania-graph1.png");
+		
+		Image img = new Image(getClass().getClassLoader().getResourceAsStream("resource/romania.jpg"));
 		ImageView imgView = new ImageView(img);
 		imgView.setImage(img);
 		imgView.setFitWidth(800);
@@ -84,7 +85,7 @@ public class GUI {
 		grid.add(imgView, 0, 2, 3, 1);
 
 		Scene scene = new Scene(grid, 800, 550);
-
+		
 		return scene;
 
 	} //End public Scene buildGUI()      

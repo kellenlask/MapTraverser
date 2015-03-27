@@ -86,4 +86,18 @@ public class MapTools {
 		return solution;
 	}
 	
+	public HashMap<String, Node> getMap() {
+		HashMap<String, Node> map = null;
+		try {
+			File selectedFile = new File(getClass().getClassLoader().getResource("resource/Romania.csv").getFile());
+			
+			String[][] csvContents = parseCSV(selectedFile); //Read the CSV file
+
+			map = dataToMap(csvContents); //Convert the CSV contents into a Node Map
+		} catch (IOException iOException) {
+		}	
+		
+		return map;
+	}
+	
 }

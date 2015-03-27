@@ -1,8 +1,5 @@
 package maptraverser;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
@@ -23,27 +20,16 @@ public class MapTraverser extends Application {
 	
 	
 	@Override
-	public void start(Stage primaryStage) {
-		File selectedFile = MapTools.getCSVFile(); //Get the CSV file from the user
-		
-		if(selectedFile != null) {
-		
-			try {
-				String[][] csvContents = MapTools.parseCSV(selectedFile); //Read the CSV file
+	public void start(Stage primaryStage) {		
+			try {				
 
-				HashMap<String, Node> map = MapTools.dataToMap(csvContents); //Convert the CSV contents into a Node Map		
+				new GUI(primaryStage); //Start the search GUI
 
-				new GUI(map, primaryStage); //Start the search GUI
-
-			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(null, "Check the .csv file.");
-				ex.printStackTrace();
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, "Something unexpected occured: " + ex.getMessage());
 				ex.printStackTrace();
+				System.exit(0);
 			}
-		} else {
-			System.exit(0);
-		}
+		
 	} //End public void start(Stage)
 } //End public class MapTraverser
