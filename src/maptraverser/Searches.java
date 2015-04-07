@@ -2,9 +2,7 @@ package maptraverser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.TreeSet;
 
 /**
  *
@@ -49,22 +47,22 @@ public class Searches {
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
 		
-		TreeSet<Action> frontier = new TreeSet<>();
-		HashSet<Node> exploredNodes = new HashSet<>();
-				
-		Node selectedNode = rootNode;
+		LinkedList<Node> list = new LinkedList<>();
+		rootNode.setExpanded(true);
+		list.push(rootNode);
 		
-		while (frontier.size() > 0) {
-			for(Node n : selectedNode.getConnectedNodes()) {
-				frontier.add(new Action(selectedNode, n));
-			}
+		while (!targetNode.isExpanded()) {
+			Node tmp = list.pop();
 			
-			Action a = frontier.pollFirst();
-			
-			
-		}
+			for(Node n : tmp.getConnectedNodes()) {
+				if(!n.isExpanded()) {
+					n.setExpandedBy(tmp);
+					list.addLast(n);
+				} 
+			} //End For Loop			
+		} //End While Loop
 
-		return "";
+		return MapTools.getReturnPath(rootNode, targetNode);
 
 	} //End public static String uniformCostSearch(HashMap<String, Node>)
 } //End public class Searches
