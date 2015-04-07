@@ -15,7 +15,7 @@ public class Searches {
 //		Breadth-First
 //
 //------------------------------------------------------------------------------
-	public static String breadthFirstSearch(HashMap<String, Node> map) {
+	public static String uniformCostSearch(HashMap<String, Node> map) {
 		LinkedList<Node> queue = new LinkedList<>();
 
 		Node rootNode = map.get("Arad");
@@ -49,7 +49,7 @@ public class Searches {
 //
 //------------------------------------------------------------------------------	
 	
-	public static String uniformCostSearch(HashMap<String, Node> map) {
+	public static String breadthFirstSearch(HashMap<String, Node> map) {
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
 		
