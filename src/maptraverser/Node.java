@@ -99,6 +99,10 @@ public class Node implements Cloneable {
 		return connectedNodes.get(n) + n.getHeuristicWeight();
 	}
 	
+	public String toString() {
+		return getName();
+	}
+	
 //------------------------------------------------------------------------------
 //
 //		Mutators

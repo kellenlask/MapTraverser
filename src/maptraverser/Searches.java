@@ -3,46 +3,52 @@ package maptraverser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.TreeSet;
 
 /**
  *
  * @author Kellen
  */
 public class Searches {
-
+//------------------------------------------------------------------------------
+//
+//		Breadth-First
+//
+//------------------------------------------------------------------------------
 	public static String breadthFirstSearch(HashMap<String, Node> map) {
 		LinkedList<Node> queue = new LinkedList<>();
-		ArrayList<Node> solution = new ArrayList<>();
 
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
 
-		queue.push(rootNode);
-
-		while (queue.size() > 0) {
-			Node tmp = queue.pop();
-
-			for (Node n : tmp.getConnectedNodes()) {
-				if (!n.isExpanded()) {
-					n.setExpanded(true);
-					n.setExpandedBy(tmp);
-
-					if (n.equals(targetNode)) {
-						return MapTools.getReturnPath(rootNode, n);
-
-					} else {
-						queue.push(n);
-					}
-					
-				} //End if node is not expanded
-				
-			} //End For Loop
-		} //End While Loop
-
-		return ""; //Fall-back return
+		TreeSet<Action> actions = new TreeSet<>();
+		
+		actions.add(new Action(rootNode));
+		while(actions.size() > 0) {
+			Action a = actions.pollFirst();
+			ArrayList<Node> nodeList = a.getNodes();
+			
+			if(nodeList.get(nodeList.size() - 1).equals(targetNode)) {
+				return a.toString();
+			}
+			
+			for(Node n : nodeList.get(nodeList.size() - 1).getConnectedNodes()) {
+				actions.add(new Action(a, n));
+			}
+			
+		}
+		
+		return "";
+		
 
 	} //End public static String breadthFirstSearch(HashMap<String, Node>)
 
+//------------------------------------------------------------------------------
+//
+//		Uniform Cost
+//
+//------------------------------------------------------------------------------	
+	
 	public static String uniformCostSearch(HashMap<String, Node> map) {
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
