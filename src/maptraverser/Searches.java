@@ -2,7 +2,6 @@ package maptraverser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.TreeSet;
 
@@ -11,60 +10,65 @@ import java.util.TreeSet;
  * @author Kellen
  */
 public class Searches {
-
+//------------------------------------------------------------------------------
+//
+//		Breadth-First
+//
+//------------------------------------------------------------------------------
 	public static String breadthFirstSearch(HashMap<String, Node> map) {
 		LinkedList<Node> queue = new LinkedList<>();
-		ArrayList<Node> solution = new ArrayList<>();
 
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
 
-		queue.push(rootNode);
-
-		while (queue.size() > 0) {
-			Node tmp = queue.pop();
-
-			for (Node n : tmp.getConnectedNodes()) {
-				if (!n.isExpanded()) {
-					n.setExpanded(true);
-					n.setExpandedBy(tmp);
-
-					if (n.equals(targetNode)) {
-						return MapTools.getReturnPath(rootNode, n);
-
-					} else {
-						queue.push(n);
-					}
-					
-				} //End if node is not expanded
-				
-			} //End For Loop
-		} //End While Loop
-
-		return ""; //Fall-back return
+		TreeSet<Action> actions = new TreeSet<>();
+		
+		actions.add(new Action(rootNode));
+		while(actions.size() > 0) {
+			Action a = actions.pollFirst();
+			ArrayList<Node> nodeList = a.getNodes();
+			
+			if(nodeList.get(nodeList.size() - 1).equals(targetNode)) {
+				return a.toString();
+			}
+			
+			for(Node n : nodeList.get(nodeList.size() - 1).getConnectedNodes()) {
+				actions.add(new Action(a, n));
+			}
+			
+		}
+		
+		return "";
+		
 
 	} //End public static String breadthFirstSearch(HashMap<String, Node>)
 
+//------------------------------------------------------------------------------
+//
+//		Uniform Cost
+//
+//------------------------------------------------------------------------------	
+	
 	public static String uniformCostSearch(HashMap<String, Node> map) {
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
 		
-		TreeSet<Action> frontier = new TreeSet<>();
-		HashSet<Node> exploredNodes = new HashSet<>();
-				
-		Node selectedNode = rootNode;
+		LinkedList<Node> list = new LinkedList<>();
+		rootNode.setExpanded(true);
+		list.push(rootNode);
 		
-		while (frontier.size() > 0) {
-			for(Node n : selectedNode.getConnectedNodes()) {
-				frontier.add(new Action(selectedNode, n));
-			}
+		while (!targetNode.isExpanded()) {
+			Node tmp = list.pop();
 			
-			Action a = frontier.pollFirst();
-			
-			
-		}
+			for(Node n : tmp.getConnectedNodes()) {
+				if(!n.isExpanded()) {
+					n.setExpandedBy(tmp);
+					list.addLast(n);
+				} 
+			} //End For Loop			
+		} //End While Loop
 
-		return "";
+		return MapTools.getReturnPath(rootNode, targetNode);
 
 	} //End public static String uniformCostSearch(HashMap<String, Node>)
 } //End public class Searches

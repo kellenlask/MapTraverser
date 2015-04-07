@@ -17,13 +17,20 @@ import javafx.stage.Stage;
  * @author Kellen
  */
 public class GUI {
-
-	//Fields
+//------------------------------------------------------------------------------
+//
+//		Fields
+//
+//------------------------------------------------------------------------------
 	private ComboBox<String> searchBox;
 	private Text results;
 	private Button runButton;
 
-	//Constructor
+//------------------------------------------------------------------------------
+//
+//		Constructor
+//
+//------------------------------------------------------------------------------
 	public GUI(Stage primaryStage) {
 		primaryStage.setTitle("Map Traverser");
 		primaryStage.setScene(buildGUI());
@@ -31,6 +38,11 @@ public class GUI {
 
 	} //End Constructor
 
+//------------------------------------------------------------------------------
+//
+//		Action Handlers
+//
+//------------------------------------------------------------------------------	
 	public void addRunButtonListener() {
 		runButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -59,6 +71,11 @@ public class GUI {
 		});	//End setOnAction(...
 	} //End public void addRunButtonListener()
 
+//------------------------------------------------------------------------------
+//
+//		Logistical Methods
+//
+//------------------------------------------------------------------------------	
 	public Scene buildGUI() {
 		runButton = new Button("Run");
 		results = new Text();

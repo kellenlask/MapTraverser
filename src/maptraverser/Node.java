@@ -8,7 +8,11 @@ import java.util.Set;
  * @author Kellen
  */
 public class Node implements Cloneable {
-//Fields
+//------------------------------------------------------------------------------
+//
+//		Fields
+//
+//------------------------------------------------------------------------------
 
 	private String name;
 	private HashMap<Node, Integer> connectedNodes;
@@ -16,7 +20,14 @@ public class Node implements Cloneable {
 	private boolean expanded;
 	protected Node expandedBy;
 
-//Constructors
+//------------------------------------------------------------------------------
+//
+//		Constructors
+//
+//------------------------------------------------------------------------------
+	public Node() {
+	}
+	
 	public Node(String name) {
 		this.name = name;
 		connectedNodes = new HashMap<>();
@@ -40,8 +51,12 @@ public class Node implements Cloneable {
 		connectedNodes = new HashMap<>();
 		this.name = name;
 	}
-
-//Accessors
+	
+//------------------------------------------------------------------------------
+//
+//		Accessors
+//
+//------------------------------------------------------------------------------
 	public Node getExpandedBy() {
 		return expandedBy;
 	}
@@ -84,8 +99,15 @@ public class Node implements Cloneable {
 		return connectedNodes.get(n) + n.getHeuristicWeight();
 	}
 	
-
-//Mutators
+	public String toString() {
+		return getName();
+	}
+	
+//------------------------------------------------------------------------------
+//
+//		Mutators
+//
+//------------------------------------------------------------------------------
 	public void setName(String name) {
 		this.name = name;
 
@@ -93,9 +115,6 @@ public class Node implements Cloneable {
 
 	public void setExpanded(boolean expanded) {
 		this.expanded = expanded;
-	}
-
-	public Node() {
 	}
 
 	public void setHeuristicWeight(int heuristicWeight) {
@@ -122,7 +141,8 @@ public class Node implements Cloneable {
 	} //End public void addConnectedNode(Node	
 
 	public void setExpandedBy(Node n) {
-		this.expandedBy = n;
+		expanded = true;
+		expandedBy = n;
 	} //End public void setExpandedBy(Node)
 	
 } //End public class Node
