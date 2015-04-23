@@ -40,7 +40,8 @@ public class MapTools {
 			}                
 		}
 
-		//Per entry, add the connection and its weight. This only works if each connection is mapped both ways (the .csv is as such)
+		//Per entry, add the connection and its weight. This only works if each
+		//connection is mapped both ways (the .csv is as such)
 		for(String[] sa : data) {
 			if( !map.get(sa[0]).isConnectedNode(map.get(sa[1])) ) {
 				map.get(sa[0]).addConnectedNode(map.get(sa[1]), sa[2]);
@@ -89,7 +90,8 @@ public class MapTools {
 	public HashMap<String, Node> getMap() {
 		HashMap<String, Node> map = null;
 		try {
-			File selectedFile = new File(getClass().getClassLoader().getResource("resource/Romania.csv").getFile());
+			File selectedFile = new File(getClass().getClassLoader().
+					getResource("resource/Romania.csv").getFile());
 			
 			String[][] csvContents = parseCSV(selectedFile); //Read the CSV file
 

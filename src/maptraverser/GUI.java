@@ -51,7 +51,8 @@ public class GUI {
 				HashMap<String, Node> map = mt.getMap();
 				
 				String selectedItem = "";
-				selectedItem += searchBox.getSelectionModel().getSelectedItem(); //Get the selected Search Algorithm from the selectionBox
+				 //Get the selected Search Algorithm from the selectionBox
+				selectedItem += searchBox.getSelectionModel().getSelectedItem();
 
 				switch (selectedItem) {
 					case "Breadth-First Search":

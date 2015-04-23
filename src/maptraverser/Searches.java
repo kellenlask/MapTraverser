@@ -18,6 +18,7 @@ public class Searches {
 	public static String uniformCostSearch(HashMap<String, Node> map) {
 		LinkedList<Node> queue = new LinkedList<>();
 
+		//Problem
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
 
@@ -50,6 +51,7 @@ public class Searches {
 //------------------------------------------------------------------------------	
 	
 	public static String breadthFirstSearch(HashMap<String, Node> map) {
+		//Problem
 		Node rootNode = map.get("Arad");
 		Node targetNode = map.get("Bucharest");
 		
